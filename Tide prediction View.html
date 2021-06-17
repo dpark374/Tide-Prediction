@@ -1,0 +1,5628 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+
+</head>
+    <style>
+   body {
+            margin: 0;
+            padding: 0;
+            font: 11pt "Arial";
+			
+        }
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+        .page {
+		    display: table;
+			clear: both;
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 1cm;
+            margin: 1cm auto;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			overflow: hidden;
+			border: 1px solid #ccc;
+            line-height: 10px;			
+        }
+        .subpage {
+		    float: left;
+			width: 25%;
+            padding: 0.5cm;
+            height: 190mm;
+        }
+        @page {
+            size: A4 landscape;
+            margin: 0;
+            /*size: landscape;*/
+        }
+        @media print {
+            .page {
+                margin: 0;
+                border: initial;
+                border-radius: initial;
+                width: initial;
+                min-height: initial;
+                box-shadow: initial;
+                background: initial;
+                page-break-after: always;
+            }
+        }
+		.page button {
+		  background-color: inherit;
+		  float: center;
+		  border: none;
+		  outline: none;
+		  cursor: pointer;
+		  padding: 5px 17px;
+		  transition: 0.3s;
+		}
+
+		/* Change background color of buttons on hover */
+		.page button:hover {
+		  background-color: #ddd;
+		}
+
+		/* Create an active/current tablink class */
+		.page button.active {
+		  background-color: #ccc;
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+		  display: none;
+		  padding: 6px 12px;
+		  border: 1px solid #ccc;
+		  border-top: none;
+		}
+    tr {line-height: 80%}
+	tr:empty::before{content:'\00a0';visibility:hidden;}
+    td {line-height: 90%; padding-right: 15px; font-size: 15;}
+    table:nth-child(2) {color: Red;}*/
+	/*table:nth-child(2) {color: blue; font-weight:bold; font-family:serif}	*/
+    td:empty::before{content:'\00a0';visibility:hidden;}
+	tbody{
+	font-size: 12;
+	}
+	table {cellspacing: 5px }
+
+    </style>
+<body id="parent">
+
+<div id="div1" Class="book">
+<div id="div2" Class="page" style="text-align: center;">
+  <form id="myForm" formtarget="_blank">
+	<table class="header" border="0" width="100%" align="center">
+		<tr><!-- 1s -->
+			<td rowSpan="2" ><img src="https://www.linz.govt.nz/sites/all/themes/linz_osi/images/logo/logo-linz.png" width="250"></td>
+			<td>Sourced from <a href="http://www.linz.govt.nz">http://www.linz.govt.nz</a></td>
+			<td><input type="file" id="csvFile" accept=".csv" /></td>
+		</tr><!-- 1e -->
+		<tr><!-- 2s -->
+			<td>E-mail address <a href="mailto:hydro@linz.govt.nz">hydro@linz.govt.nz</a></td>
+			<td><input type="submit" value="Submit" /></td>
+		</tr><!-- 2e -->
+	</table>
+   
+  </form>
+</div>
+
+</div>
+
+  <script>
+    const myForm = document.getElementById("myForm");
+    const csvFile = document.getElementById("csvFile");
+    
+
+    myForm.addEventListener("submit", function (e) {
+	//window.onload = function (e){
+      e.preventDefault();
+      const input = csvFile.files[0];
+      const reader = new FileReader();
+
+  
+      reader.onload = function (e) {
+        const text = e.target.result;
+        //document.write(text);
+		const data = csvToArray(text)[0];
+		const head = csvToArray(text)[1];
+        //document.write(JSON.stringify(data));
+		//document.write(head[2]);
+		//document.write(input);
+		
+		//var obj = document.getElementById("parent");
+		//var divbk = document.createElement('div');
+		//    divbk.setAttribute('class','book');
+		//    divbk.setAttribute('id','div1');
+		   
+		var divpg = document.createElement('div');
+		    divpg.setAttribute('class','page');
+			divpg.setAttribute('id','div2');
+			divpg.setAttribute('style','text-align: center;'); 
+   
+//1		  
+		var divspg = document.createElement('div');
+            divspg.setAttribute('class','subpage');		
+			divspg.setAttribute('id','div3');
+		var divspg2 = document.createElement('div');
+            divspg2.setAttribute('class','subpage');		
+			divspg2.setAttribute('id','div4');
+		var divspg3 = document.createElement('div');
+            divspg3.setAttribute('class','subpage');		
+			divspg3.setAttribute('id','div5');
+		var divspg4 = document.createElement('div');
+            divspg4.setAttribute('class','subpage');		
+			divspg4.setAttribute('id','div6');
+//2	f		
+		var divspgf = document.createElement('div');
+            divspgf.setAttribute('class','subpage');		
+			divspgf.setAttribute('id','div3f');
+		var divspg2f = document.createElement('div');
+            divspg2f.setAttribute('class','subpage');		
+			divspg2f.setAttribute('id','div4f');
+		var divspg3f = document.createElement('div');
+            divspg3f.setAttribute('class','subpage');		
+			divspg3f.setAttribute('id','div5f');
+		var divspg4f = document.createElement('div');
+            divspg4f.setAttribute('class','subpage');		
+			divspg4f.setAttribute('id','div6f');			
+//3	m		
+		var divspgm = document.createElement('div');
+            divspgm.setAttribute('class','subpage');		
+			divspgm.setAttribute('id','div3m');
+		var divspg2m = document.createElement('div');
+            divspg2m.setAttribute('class','subpage');		
+			divspg2m.setAttribute('id','div4m');
+		var divspg3m = document.createElement('div');
+            divspg3m.setAttribute('class','subpage');		
+			divspg3m.setAttribute('id','div5m');
+		var divspg4m = document.createElement('div');
+            divspg4m.setAttribute('class','subpage');		
+			divspg4m.setAttribute('id','div6m');
+//4	a			
+		var divspga = document.createElement('div');
+            divspga.setAttribute('class','subpage');		
+			divspga.setAttribute('id','div3a');	
+		var divspg2a = document.createElement('div');
+            divspg2a.setAttribute('class','subpage');		
+			divspg2a.setAttribute('id','div4a');		
+		var divspg3a = document.createElement('div');
+            divspg3a.setAttribute('class','subpage');		
+			divspg3a.setAttribute('id','div5a');
+		var divspg4a = document.createElement('div');
+            divspg4a.setAttribute('class','subpage');		
+			divspg4a.setAttribute('id','div6a');		
+//5 my
+		var divspgmy = document.createElement('div');
+            divspgmy.setAttribute('class','subpage');		
+			divspgmy.setAttribute('id','div3my');			
+		var divspg2my = document.createElement('div');
+            divspg2my.setAttribute('class','subpage');		
+			divspg2my.setAttribute('id','div4my');				
+		var divspg3my = document.createElement('div');
+            divspg3my.setAttribute('class','subpage');		
+			divspg3my.setAttribute('id','div5my');			
+		var divspg4my = document.createElement('div');
+            divspg4my.setAttribute('class','subpage');		
+			divspg4my.setAttribute('id','div6my');
+//6	j		
+		var divspgj = document.createElement('div');
+            divspgj.setAttribute('class','subpage');		
+			divspgj.setAttribute('id','div3j');
+		var divspg2j = document.createElement('div');
+            divspg2j.setAttribute('class','subpage');		
+			divspg2j.setAttribute('id','div4j');
+		var divspg3j = document.createElement('div');
+            divspg3j.setAttribute('class','subpage');		
+			divspg3j.setAttribute('id','div5j');
+		var divspg4j = document.createElement('div');
+            divspg4j.setAttribute('class','subpage');		
+			divspg4j.setAttribute('id','div6j');
+//7	jl		
+		var divspgjl = document.createElement('div');
+            divspgjl.setAttribute('class','subpage');		
+			divspgjl.setAttribute('id','div3jl');
+		var divspg2jl = document.createElement('div');
+            divspg2jl.setAttribute('class','subpage');		
+			divspg2jl.setAttribute('id','div4jl');
+		var divspg3jl = document.createElement('div');
+            divspg3jl.setAttribute('class','subpage');		
+			divspg3jl.setAttribute('id','div5jl');
+		var divspg4jl = document.createElement('div');
+            divspg4jl.setAttribute('class','subpage');		
+			divspg4jl.setAttribute('id','div6jl');		
+//8	au				
+        var divspgau = document.createElement('div');
+            divspgau.setAttribute('class','subpage');		
+			divspgau.setAttribute('id','div3au');	
+		var divspg2au = document.createElement('div');
+            divspg2au.setAttribute('class','subpage');		
+			divspg2au.setAttribute('id','div4au');	
+		var divspg3au = document.createElement('div');
+            divspg3au.setAttribute('class','subpage');		
+			divspg3au.setAttribute('id','div5au');
+		var divspg4au = document.createElement('div');
+            divspg4au.setAttribute('class','subpage');		
+			divspg4au.setAttribute('id','div6au');
+//9 se			
+		var divspgse = document.createElement('div');
+            divspgse.setAttribute('class','subpage');		
+			divspgse.setAttribute('id','div3se');
+		var divspg2se = document.createElement('div');
+            divspg2se.setAttribute('class','subpage');		
+			divspg2se.setAttribute('id','div4se');
+		var divspg3se = document.createElement('div');
+            divspg3se.setAttribute('class','subpage');		
+			divspg3se.setAttribute('id','div5se');
+		var divspg4se = document.createElement('div');
+            divspg4se.setAttribute('class','subpage');		
+			divspg4se.setAttribute('id','div6se');
+//10 o			
+		var divspgo = document.createElement('div');
+            divspgo.setAttribute('class','subpage');		
+			divspgo.setAttribute('id','div3o');
+		var divspg2o = document.createElement('div');
+            divspg2o.setAttribute('class','subpage');		
+			divspg2o.setAttribute('id','div4o');
+		var divspg3o = document.createElement('div');
+            divspg3o.setAttribute('class','subpage');		
+			divspg3o.setAttribute('id','div5o');
+		var divspg4o = document.createElement('div');
+            divspg4o.setAttribute('class','subpage');		
+			divspg4o.setAttribute('id','div6o');
+//11 n		
+		var divspgn = document.createElement('div');
+            divspgn.setAttribute('class','subpage');		
+			divspgn.setAttribute('id','div3n');
+		var divspg2n = document.createElement('div');
+            divspg2n.setAttribute('class','subpage');		
+			divspg2n.setAttribute('id','div4n');
+		var divspg3n = document.createElement('div');
+            divspg3n.setAttribute('class','subpage');		
+			divspg3n.setAttribute('id','div5n');
+		var divspg4n = document.createElement('div');
+            divspg4n.setAttribute('class','subpage');		
+			divspg4n.setAttribute('id','div6n');
+//12 d			
+		var divspgd = document.createElement('div');
+            divspgd.setAttribute('class','subpage');		
+			divspgd.setAttribute('id','div3d');
+		var divspg2d = document.createElement('div');
+            divspg2d.setAttribute('class','subpage');		
+			divspg2d.setAttribute('id','div4d');
+		var divspg3d = document.createElement('div');
+            divspg3d.setAttribute('class','subpage');		
+			divspg3d.setAttribute('id','div5d');
+		var divspg4d = document.createElement('div');
+            divspg4d.setAttribute('class','subpage');		
+			divspg4d.setAttribute('id','div6d');
+
+
+		
+		var divpg2 = document.createElement('div');
+            divpg2.setAttribute('class','page2');		
+			divpg2.setAttribute('id','Jan');
+				
+		var divpg3 = document.createElement('div');
+            divpg3.setAttribute('class','page2');		
+			divpg3.setAttribute('id','Feb');
+		
+		var divpg4 = document.createElement('div');
+            divpg4.setAttribute('class','page2');		
+			divpg4.setAttribute('id','Mar');
+		
+		var divpg5 = document.createElement('div');
+            divpg5.setAttribute('class','page2');		
+			divpg5.setAttribute('id','Apr');
+		
+		var divpg6 = document.createElement('div');
+            divpg6.setAttribute('class','page2');		
+			divpg6.setAttribute('id','May');
+		
+		var divpg7 = document.createElement('div');
+            divpg7.setAttribute('class','page2');		
+			divpg7.setAttribute('id','Jun');
+		
+		var divpg8 = document.createElement('div');
+            divpg8.setAttribute('class','page2');		
+			divpg8.setAttribute('id','Jul');
+		
+		var divpg9 = document.createElement('div');
+            divpg9.setAttribute('class','page2');		
+			divpg9.setAttribute('id','Aug');
+		
+		var divpg10 = document.createElement('div');
+            divpg10.setAttribute('class','page2');		
+			divpg10.setAttribute('id','Sep');
+		
+		var divpg11 = document.createElement('div');
+            divpg11.setAttribute('class','page2');		
+			divpg11.setAttribute('id','Oct');
+		
+		var divpg12 = document.createElement('div');
+            divpg12.setAttribute('class','page2');		
+			divpg12.setAttribute('id','Nov');
+		
+		var divpg13 = document.createElement('div');
+            divpg13.setAttribute('class','page2');		
+			divpg13.setAttribute('id','Dec');
+			
+		var h4 = document.createElement('H4');
+		    h4.innerHTML = 'NEW ZEALAND HYDROGRAPHIC AUTHORITY TIDE PREDICTIONS';
+ 
+		var pa1 = document.createElement('H1');
+		    pa1.innerHTML = head[1];
+			pa1.setAttribute('style','color: #14ab9b; font-weight: bold;'); 
+		
+		var pa2 = document.createElement('P');
+		    pa2.innerHTML = 'Lat. '+head[2]+'  '+'Long. '+head[3];
+			pa2.setAttribute('style','font-size:12'); 
+			
+		var pa3 = document.createElement('P');
+		    pa3.innerHTML = 'N.Z. LOCAL TIMES AND HEIGHTS OF HIGH AND LOW WATERS';
+		
+		var pa4 = document.createElement('P');
+			pa4.setAttribute('style','text-align: center;');
+			pa4.setAttribute('id','Monthl');
+		
+		var pa5 = document.createElement('P');
+			pa5.setAttribute('style','text-align: center;');
+			pa5.setAttribute('id','Yearl');
+			
+		var pa6 = document.createElement('P');
+			pa6.innerHTML = 'TIMES LISTED ARE N.Z. DAYLIGHT TIME';
+			pa6.setAttribute('id','end1');
+		
+		var pa7 = document.createElement('P');
+			pa7.innerHTML = 'CROWN COPYRIGHT RESERVED';
+			pa7.setAttribute('id','end2');
+		
+		var sp1 = document.createElement('SPAN');
+		    sp1.setAttribute('id','sp1');
+			sp1.setAttribute('style','color: #14ab9b; font-weight: bold;');
+			sp1.innerHTML = 'Month';
+
+			
+		var texty = data[3].Year;
+				
+		var sp2 = document.createElement('SPAN');
+		    sp2.setAttribute('id','sp2');
+			sp2.setAttribute('style','color: #14ab9b; font-weight: bold;');
+			sp2.innerHTML = texty;
+		
+	
+		var btn1 = document.createElement('button');
+            btn1.setAttribute('class','tablinks');
+            btn1.setAttribute('id','defaultOpen');				
+            btn1.setAttribute('onclick',"openMonth(event, 'Jan')");			
+		    btn1.innerHTML = 'Jan';
+		var btn2 = document.createElement('button');
+            btn2.setAttribute('onclick',"openMonth(event, 'Feb')");
+            btn2.setAttribute('class','tablinks');			
+		    btn2.innerHTML = 'Feb';			
+		var btn3 = document.createElement('button');
+		    btn3.setAttribute('onclick',"openMonth(event, 'Mar')");
+            btn3.setAttribute('class','tablinks');		
+		    btn3.innerHTML = 'Mar';
+		var btn4 = document.createElement('button');
+			btn4.setAttribute('onclick',"openMonth(event, 'Apr')");
+            btn4.setAttribute('class','tablinks');		
+		    btn4.innerHTML = 'Apr';
+		var btn5 = document.createElement('button');
+			btn5.setAttribute('onclick',"openMonth(event, 'May')");
+            btn5.setAttribute('class','tablinks');		
+		    btn5.innerHTML = 'May';
+		var btn6 = document.createElement('button');
+			btn6.setAttribute('onclick',"openMonth(event, 'Jun')");
+            btn6.setAttribute('class','tablinks');		
+		    btn6.innerHTML = 'Jun';
+		var btn7 = document.createElement('button');
+			btn7.setAttribute('onclick',"openMonth(event, 'Jul')");
+            btn7.setAttribute('class','tablinks');		
+		    btn7.innerHTML = 'Jul';
+		var btn8 = document.createElement('button');
+			btn8.setAttribute('onclick',"openMonth(event, 'Aug')");
+            btn8.setAttribute('class','tablinks');		
+		    btn8.innerHTML = 'Aug';
+		var btn9 = document.createElement('button');
+			btn9.setAttribute('onclick',"openMonth(event, 'Sep')");
+            btn9.setAttribute('class','tablinks');		
+		    btn9.innerHTML = 'Sep';
+		var btn10 = document.createElement('button');
+			btn10.setAttribute('onclick',"openMonth(event, 'Oct')");
+            btn10.setAttribute('class','tablinks');		
+		    btn10.innerHTML = 'Oct';
+		var btn11 = document.createElement('button');
+			btn11.setAttribute('onclick',"openMonth(event, 'Nov')");
+            btn11.setAttribute('class','tablinks');		
+		    btn11.innerHTML = 'Nov';
+		var btn12 = document.createElement('button');
+			btn12.setAttribute('onclick',"openMonth(event, 'Dec')");
+            btn12.setAttribute('class','tablinks');		
+		    btn12.innerHTML = 'Dec';
+		
+		
+		var table = document.createElement('table');
+		table.border = 0;
+		//var tbdy = document.createElement('tbody');
+		for (var i = 2; i < 10; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;'); 
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+		
+
+
+
+            //obj.appendChild(divbk);
+			//var p1 = document.getElementById("div1");
+			
+			//p1.appendChild(divpg);
+		
+			var p2 = document.getElementById("div2");
+			//pg2.appendChild(btn1);
+
+			p2.appendChild(h4);
+			p2.appendChild(pa1);
+			p2.appendChild(pa2);
+			
+            p2.appendChild(sp1);
+			p2.appendChild(sp2);
+			//p2.appendChild(pa5);
+			
+			
+			p2.appendChild(pa3);
+			
+			
+			p2.appendChild(btn1);
+			p2.appendChild(btn2);
+			p2.appendChild(btn3);
+			p2.appendChild(btn4);
+			p2.appendChild(btn5);
+			p2.appendChild(btn6);
+			p2.appendChild(btn7);
+			p2.appendChild(btn8);
+			p2.appendChild(btn9);
+			p2.appendChild(btn10);
+			p2.appendChild(btn11);
+			p2.appendChild(btn12);
+			
+
+			
+			p2.appendChild(divpg2);
+			
+			
+			var p7 = document.getElementById("Jan");
+				
+			p7.appendChild(divspg);
+		    p7.appendChild(divspg2);
+			p7.appendChild(divspg3);
+			p7.appendChild(divspg4);
+
+			/////////////////////////////////////////////////////////////////////t1/////////////////////////////////////////
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+	      
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+			
+
+
+			table.appendChild(tr1);
+
+            //
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p3 = document.getElementById("div3");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = 10; i < 18; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+			table2.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p4 = document.getElementById("div4");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = 18; i < 26; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td'); 
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p5 = document.getElementById("div5");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		for (var i = 26; i < 33; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+ 			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p6 = document.getElementById("div6");
+		p6.appendChild(table4);	
+		
+		
+		
+		///////////////////////////////////////Feb
+		/////////////////////////////////////////////////////////////////////////
+		
+		
+			
+		var table = document.createElement('table');
+		table.border = 0;
+		//var tbdy = document.createElement('tbody');
+		for (var i = 33; i < 41; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			p2.appendChild(divpg3);
+			
+			var p7 = document.getElementById("Feb");
+
+			
+			p7.appendChild(divspgf);
+		    p7.appendChild(divspg2f);
+			p7.appendChild(divspg3f);
+			p7.appendChild(divspg4f);
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+
+
+			table.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p3 = document.getElementById("div3f");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = 41; i < 49; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10);
+			
+
+
+			table2.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p4 = document.getElementById("div4f");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = 49; i < 57; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p5 = document.getElementById("div5f");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		var textY = data[3].Year;
+		
+		var ndays = getDaysInMonth(2, textY); 
+		var nday = ndays % 8;
+		var a = 65 - nday;
+		
+		for (var i = 57; i < a; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p6 = document.getElementById("div6f");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Feb End
+		////////////////////////////////////////
+		
+		///////////////////////////////////////Mar
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+		var ndays = getDaysInMonth(3, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){
+		   var a1= a + 8;
+           var a2= a1 + 8;
+           var a3= a2 + 8;
+           var a4= a3 + 7;		   
+		}
+		
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			p2.appendChild(divpg4);
+			
+			var p7 = document.getElementById("Mar");
+			
+			p7.appendChild(divspgm);
+		    p7.appendChild(divspg2m);
+			p7.appendChild(divspg3m);
+			p7.appendChild(divspg4m);
+			
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p3 = document.getElementById("div3m");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+				
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p4 = document.getElementById("div4m");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p5 = document.getElementById("div5m");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10);
+			
+
+
+			table4.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p6 = document.getElementById("div6m");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Mar End
+		////////////////////////////////////////
+		
+		///////////////////////////////////////Apr/////////////////////////////////////
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+		
+		a=a4;
+		var ndays = getDaysInMonth(4, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+		
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			p2.appendChild(divpg5);
+			
+			var p7 = document.getElementById("Apr");
+			
+			p7.appendChild(divspga);
+		    p7.appendChild(divspg2a);
+			p7.appendChild(divspg3a);
+			p7.appendChild(divspg4a);
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10);
+			
+		
+
+			table.appendChild(tr1);
+			
+			//table.children[3].style.fontWeight = 'bold';////////////////////////////////////////////////////////////////////////
+			
+			var dday = DisplayDstSwitchDates(texty);
+			
+			//
+			
+			if(td1.innerHTML < dday[1]){
+			  td3.setAttribute('style','font-weight: bold;');
+			  td7.setAttribute('style','font-weight: bold;');
+			  td4.setAttribute('style','font-weight: bold;');
+			  td8.setAttribute('style','font-weight: bold;');
+			  td5.setAttribute('style','font-weight: bold;');
+			  td9.setAttribute('style','font-weight: bold;');
+			  td6.setAttribute('style','font-weight: bold;');
+			  td10.setAttribute('style','font-weight: bold;');
+			}else if (td1.innerHTML == dday[1]){
+			  
+			  var t = compareTime(td3.innerHTML, '02:59');
+				if ( t == -1){ 
+			  td3.setAttribute('style','font-weight: bold;');
+			  td7.setAttribute('style','font-weight: bold;');
+
+			  }
+			}else{
+				
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+		}
+		var p3 = document.getElementById("div3a");
+		p3.appendChild(table);
+		
+
+		
+		
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+				
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+
+			
+			//
+			
+		}
+		var p4 = document.getElementById("div4a");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+	
+			//
+		}
+		var p5 = document.getElementById("div5a");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10);
+			
+
+
+			table4.appendChild(tr1);
+
+			//
+		}
+		var p6 = document.getElementById("div6a");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Apr End
+		//////////////////////////////////////////////
+		
+		///////////////////////////////////////May
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+		
+		a=a4;
+		var ndays = getDaysInMonth(5, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+		
+		for (var i = a; i < a1; i++){
+
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			p2.appendChild(divpg6);
+			
+			var p7 = document.getElementById("May");
+			
+			p7.appendChild(divspgmy);
+		    p7.appendChild(divspg2my);
+			p7.appendChild(divspg3my);
+			p7.appendChild(divspg4my);
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+
+			//
+		}
+		var p3 = document.getElementById("div3my");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+				
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+		
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+
+			//
+			
+		}
+		var p4 = document.getElementById("div4my");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+
+			//
+			
+		}
+		var p5 = document.getElementById("div5my");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+
+			//
+			
+		}
+		var p6 = document.getElementById("div6my");
+		p6.appendChild(table4);	
+		//////////////////////////////////////May End
+		//////////////////////////////////////////////		
+		
+		///////////////////////////////////////Jun
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+		
+		a=a4;
+		var ndays = getDaysInMonth(6, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+		
+		
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			p2.appendChild(divpg7);
+			
+			var p7 = document.getElementById("Jun");
+			
+			p7.appendChild(divspgj);
+		    p7.appendChild(divspg2j);
+			p7.appendChild(divspg3j);
+			p7.appendChild(divspg4j);
+			
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+
+			//
+			
+		}
+		var p3 = document.getElementById("div3j");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+
+			//
+			
+		}
+		var p4 = document.getElementById("div4j");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+
+			//
+		}
+		var p5 = document.getElementById("div5j");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+     		td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+
+			//
+			
+		}
+		var p6 = document.getElementById("div6j");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Jun End
+		//////////////////////////////////////////////
+		
+				///////////////////////////////////////Jul
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+		
+		a=a4;
+		var ndays = getDaysInMonth(7, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+	
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			p2.appendChild(divpg8);
+			
+			var p7 = document.getElementById("Jul");
+			
+			p7.appendChild(divspgjl);
+		    p7.appendChild(divspg2jl);
+			p7.appendChild(divspg3jl);
+			p7.appendChild(divspg4jl);
+			
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+
+			//
+			
+		}
+		var p3 = document.getElementById("div3jl");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+
+			//
+			
+		}
+		var p4 = document.getElementById("div4jl");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+
+			//
+		}
+		var p5 = document.getElementById("div5jl");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+     		td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+		
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+
+			//
+		}
+		var p6 = document.getElementById("div6jl");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Jul End
+		//////////////////////////////////////////////
+		
+		///////////////////////////////////////Aug
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+	
+			a=a4;
+		var ndays = getDaysInMonth(8, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+	
+	
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			p2.appendChild(divpg9);
+			
+			var p7 = document.getElementById("Aug");
+			
+			p7.appendChild(divspgau);
+		    p7.appendChild(divspg2au);
+			p7.appendChild(divspg3au);
+			p7.appendChild(divspg4au);
+			
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+
+			//
+		}
+		var p3 = document.getElementById("div3au");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10);
+			
+
+
+			table2.appendChild(tr1);
+
+			//
+		}
+		var p4 = document.getElementById("div4au");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+
+			//
+		}
+		var p5 = document.getElementById("div5au");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+     		td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+
+			//
+		}
+		var p6 = document.getElementById("div6au");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Aug End
+		//////////////////////////////////////////////
+				
+		///////////////////////////////////////Sep
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+
+		a=a4;
+		var ndays = getDaysInMonth(9, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+	
+
+
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			p2.appendChild(divpg10);
+			
+			var p7 = document.getElementById("Sep");
+			
+			p7.appendChild(divspgse);
+		    p7.appendChild(divspg2se);
+			p7.appendChild(divspg3se);
+			p7.appendChild(divspg4se);
+			
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+
+			//
+		}
+		var p3 = document.getElementById("div3se");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10);
+			
+
+
+			table2.appendChild(tr1);
+
+		}
+		var p4 = document.getElementById("div4se");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//
+            if(td1.innerHTML > dday[0]){
+			  td3.setAttribute('style','font-weight: bold;');
+			  td7.setAttribute('style','font-weight: bold;');
+			  td4.setAttribute('style','font-weight: bold;');
+			  td8.setAttribute('style','font-weight: bold;');
+			  td5.setAttribute('style','font-weight: bold;');
+			  td9.setAttribute('style','font-weight: bold;');
+			  td6.setAttribute('style','font-weight: bold;');
+			  td10.setAttribute('style','font-weight: bold;');
+			}else if (td1.innerHTML == dday[0]){
+			  
+			  var t = compareTime(td3.innerHTML, '01:59');
+				if ( t == 1){ 
+			  td3.setAttribute('style','font-weight: bold;');
+			  td7.setAttribute('style','font-weight: bold;');
+			  }
+			  td4.setAttribute('style','font-weight: bold;');
+			  td8.setAttribute('style','font-weight: bold;');
+			  td5.setAttribute('style','font-weight: bold;');
+			  td9.setAttribute('style','font-weight: bold;');
+			  td6.setAttribute('style','font-weight: bold;');
+			  td10.setAttribute('style','font-weight: bold;');
+			  
+			}else{
+
+			} 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			table3.appendChild(tr1);
+			
+		}
+		var p5 = document.getElementById("div5se");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+     		td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+						
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//
+            if(td1.innerHTML > dday[0]){
+			  td3.setAttribute('style','font-weight: bold;');
+			  td7.setAttribute('style','font-weight: bold;');
+			  td4.setAttribute('style','font-weight: bold;');
+			  td8.setAttribute('style','font-weight: bold;');
+			  td5.setAttribute('style','font-weight: bold;');
+			  td9.setAttribute('style','font-weight: bold;');
+			  td6.setAttribute('style','font-weight: bold;');
+			  td10.setAttribute('style','font-weight: bold;');
+			}else if (td1.innerHTML == dday[0]){
+			  
+			  var t = compareTime(td3.innerHTML, '01:59');
+				if ( t == 1){ 
+			  td3.setAttribute('style','font-weight: bold;');
+			  td7.setAttribute('style','font-weight: bold;');
+			  }
+			  td4.setAttribute('style','font-weight: bold;');
+			  td8.setAttribute('style','font-weight: bold;');
+			  td5.setAttribute('style','font-weight: bold;');
+			  td9.setAttribute('style','font-weight: bold;');
+			  td6.setAttribute('style','font-weight: bold;');
+			  td10.setAttribute('style','font-weight: bold;');
+			}else{
+
+			} 
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			table4.appendChild(tr1);
+		}
+		var p6 = document.getElementById("div6se");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Sep End
+		//////////////////////////////////////////////	
+
+
+		
+			///////////////////////////////////////Oct
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+		
+				a=a4;
+		var ndays = getDaysInMonth(10, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+	
+		
+		
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			p2.appendChild(divpg11);
+			
+			var p7 = document.getElementById("Oct");
+			
+			p7.appendChild(divspgo);
+		    p7.appendChild(divspg2o);
+			p7.appendChild(divspg3o);
+			p7.appendChild(divspg4o);
+			
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p3 = document.getElementById("div3o");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p4 = document.getElementById("div4o");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p5 = document.getElementById("div5o");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+	//	var textY = data[3].Year;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+     		td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p6 = document.getElementById("div6o");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Oct End
+		//////////////////////////////////////////////
+
+
+		
+		///////////////////////////////////////Nov//////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////
+		var table = document.createElement('table');
+		table.border = 0;
+		
+				a=a4;
+		var ndays = getDaysInMonth(11, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+	
+		
+		
+		
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			p2.appendChild(divpg12);
+			
+			var p7 = document.getElementById("Nov");
+			
+			p7.appendChild(divspgn);
+		    p7.appendChild(divspg2n);
+			p7.appendChild(divspg3n);
+			p7.appendChild(divspg4n);
+			
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p3 = document.getElementById("div3n");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p4 = document.getElementById("div4n");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p5 = document.getElementById("div5n");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+     		td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+			
+			//
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p6 = document.getElementById("div6n");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Nov End
+		//////////////////////////////////////////////		
+		
+		///////////////////////////////////////Dec
+		///////////////////////////////////////
+		
+		var table = document.createElement('table');
+		table.border = 0;
+		
+		a=a4;
+		var ndays = getDaysInMonth(12, textY); 
+		var nday = ndays % 8;
+		if (nday == 7){		        
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 7;		   
+		}else if (nday == 6){
+		   a1= a + 8;
+           a2= a1 + 8;
+           a3= a2 + 8;
+           a4= a3 + 6;	
+		};
+	
+		
+		for (var i = a; i < a1; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+			p2.appendChild(divpg13);
+			
+			var p7 = document.getElementById("Dec");
+			
+			p7.appendChild(divspgd);
+		    p7.appendChild(divspg2d);
+			p7.appendChild(divspg3d);
+			p7.appendChild(divspg4d);
+			
+
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 1){
+			var row = table.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10);
+			
+
+
+			table.appendChild(tr1);
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p3 = document.getElementById("div3d");
+		p3.appendChild(table);
+		
+		////////////////////////////////////////
+		var table2 = document.createElement('table');
+		table2.border = 0;
+		
+		for (var i = a1; i < a2; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+
+			
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 9){
+			var row = table2.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table2.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table2.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table2.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table2.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table2.appendChild(tr1);
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p4 = document.getElementById("div4d");
+		p4.appendChild(table2);
+		
+		
+		
+		///////////////////////////////////////
+		var table3 = document.createElement('table');
+		table3.border = 0;
+		
+		for (var i = a2; i < a3; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+			
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			//var text3 = document.createTextNode(data[i].T1 +' '+ data[i].H1);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+		
+			td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+		
+			if (td1.innerHTML == 17){
+			var row = table3.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table3.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table3.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table3.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table3.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table3.appendChild(tr1);
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p5 = document.getElementById("div5d");
+		p5.appendChild(table3);	
+		
+		
+		
+		///////////////////////////////////////
+		
+		var table4 = document.createElement('table');
+		table4.border = 0;
+		
+		
+		for (var i = a3; i < a4; i++){
+
+			
+			var tr = document.createElement('tr');		
+			var tr1 = document.createElement('tr');	
+			var tr2 = document.createElement('tr');
+            var tr3 = document.createElement('tr');
+            var tr4 = document.createElement('tr'); var tr5 = document.createElement('tr');					
+						
+            var br = document.createElement('br');	
+			var td1 = document.createElement('td'); td1.setAttribute('style','font-size: 30; text-align: center;');
+			var td2 = document.createElement('td'); td2.setAttribute('style','vertical-align: top; text-align: center;');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+		    var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+			var td7 = document.createElement('td');
+			var td8 = document.createElement('td');
+			var td9 = document.createElement('td');
+			var td10 = document.createElement('td');
+
+			var text1 = document.createTextNode(data[i].Date);
+			var text2 = document.createTextNode(data[i].Day);
+			var text3 = document.createTextNode(data[i].T1);
+			var text4 = document.createTextNode(data[i].T2);
+			var text5 = document.createTextNode(data[i].T3);
+			var text6 = document.createTextNode(data[i].T4);
+			var text7 = document.createTextNode(data[i].H1);
+			var text8 = document.createTextNode(data[i].H2);
+			var text9 = document.createTextNode(data[i].H3);
+			var text10 = document.createTextNode(data[i].H4);
+
+     		td1.appendChild(text1);
+			td1.rowSpan =2;
+			td2.appendChild(text2);
+			td2.rowSpan =2;
+			td3.appendChild(text3);
+			td4.appendChild(text4);
+			td5.appendChild(text5);
+			td6.appendChild(text6);
+			td7.appendChild(text7);
+			td8.appendChild(text8);
+			td9.appendChild(text9);
+			td10.appendChild(text10);
+	
+				
+			if (td1.innerHTML == 25){
+			var row = table4.insertRow(0);
+	        var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = '';
+			cell2.innerHTML = 'Time';
+			cell3.innerHTML = 'm';
+			}
+			
+			table4.appendChild(tr);
+		    tr.appendChild(td1);
+            tr.appendChild(td3);
+			tr.appendChild(td7);
+			
+			table4.appendChild(tr2);
+			tr2.appendChild(td4);
+			tr2.appendChild(td8);
+			
+			table4.appendChild(tr3);
+		    tr3.appendChild(td2);
+			tr3.appendChild(td5);
+			tr3.appendChild(td9);
+			
+			table4.appendChild(tr4);
+			tr4.appendChild(td6);
+			tr4.appendChild(td10); 
+			
+
+
+			table4.appendChild(tr1);
+			td3.setAttribute('style','font-weight: bold;');
+			td7.setAttribute('style','font-weight: bold;');
+			td4.setAttribute('style','font-weight: bold;');
+			td8.setAttribute('style','font-weight: bold;');
+			td5.setAttribute('style','font-weight: bold;');
+			td9.setAttribute('style','font-weight: bold;');
+			td6.setAttribute('style','font-weight: bold;');
+			td10.setAttribute('style','font-weight: bold;');
+		}
+		var p6 = document.getElementById("div6d");
+		p6.appendChild(table4);	
+		//////////////////////////////////////Dec End
+		//////////////////////////////////////////////
+		p2.appendChild(pa6);
+		p2.appendChild(pa7);
+        document.close();
+	   // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+	
+      };
+	
+      reader.readAsText(input);
+    });
+	
+	function csvToArray(str, delimiter = ",") {
+	  // slice from start of text to the first \n index
+	  // use split to create an array from string by delimiter
+	  //
+	  const head = str.slice(0, str.indexOf("\r\n")).split(delimiter);
+	  const headers = ['Date','Day','Month','Year','T1','H1','T2','H2','T3','H3','T4','H4'];
+
+	  // slice from \n index + 1 to the end of the text
+	  // use split to create an array of each csv value row
+	  //const rows = str.slice(str.indexOf("\n") + 1).split("\n");
+      //const rows = str.slice(str.indexOf("\n") + 1).split(/\r?\n|\r/);
+	 
+	  var rows = str.slice(str.indexOf("\n") + 1).split("\r\n");
+	  
+	  // Map the rows
+	  // split values from each row into an array
+	  // use headers.reduce to create an object
+	  // object properties derived from headers:values
+	  // the object passed as an element of the array
+	  const arr = rows.map(function (row) {
+		const values = row.split(delimiter);
+		const el = headers.reduce(function (object, header, index) {
+		  object[header] = values[index];
+		  return object;
+		}, {});
+		return el;
+	  });
+
+	  // return the array
+	  return [arr, head];
+	}
+	
+	function openMonth(evt, Month) {
+	  // Declare all variables
+	  var i, subpage, tablinks;
+
+	  // Get all elements with class="tabcontent" and hide them
+	  subpage = document.getElementsByClassName("subpage");
+	  for (i = 0; i < subpage.length; i++) {
+		subpage[i].style.display = "none";
+	  }
+
+	  // Get all elements with class="tablinks" and remove the class "active"
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+
+	  // Show the current tab, and add an "active" class to the button that opened the tab
+	  var parent = document.getElementById(Month);
+	  var childs = parent.childNodes;
+	  for (i = 0; i < childs.length; i++) {
+	    childs[i].style.display = "block";
+	  }
+	  evt.currentTarget.className += " active";
+	  
+	  var sp1 = document.getElementById('sp1');
+	  var end1 = document.getElementById('end1');
+	  if (Month == 'Jan'){
+	  sp1.innerHTML = 'JANUARY ' ;
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. DAYLIGHT TIME';
+	  } else if (Month == 'Feb'){
+	  sp1.innerHTML = 'FEBRUARY ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. DAYLIGHT TIME';
+	  } else if (Month == 'Mar'){
+	  sp1.innerHTML = 'MARCH ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. DAYLIGHT TIME';
+	  } else if (Month == 'Apr'){
+	  sp1.innerHTML = 'APRIL ';
+	  end1.innerHTML = 'TIMES SHOWN IN BOLD HAVE BEEN ADJUSTED FOR N.Z DAYLIGHT TIME';
+	  } else if (Month == 'May'){
+	  sp1.innerHTML = 'MAY ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. STANDARD TIME';
+	  } else if (Month == 'Jun'){
+	  sp1.innerHTML = 'JUNE ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. STANDARD TIME';
+	  } else if (Month == 'Jul'){
+	  sp1.innerHTML = 'JULY ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. STANDARD TIME';
+	  } else if (Month == 'Aug'){
+	  sp1.innerHTML = 'AUGUST ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. STANDARD TIME';
+	  } else if (Month == 'Sep'){
+	  sp1.innerHTML = 'SEPTEMBER ';
+	  end1.innerHTML = 'TIMES SHOWN IN BOLD HAVE BEEN ADJUSTED FOR N.Z DAYLIGHT TIME';
+	  } else if (Month == 'Oct'){
+	  sp1.innerHTML = 'OCTOBER ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. DAYLIGHT TIME';
+	  } else if (Month == 'Nov'){
+	  sp1.innerHTML = 'NOVEMBER ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. DAYLIGHT TIME';
+	  } else if (Month == 'Dec'){
+	  sp1.innerHTML = 'DECEMBER ';
+	  end1.innerHTML = 'TIMES LISTED ARE N.Z. DAYLIGHT TIME';
+	  } else {}
+	}
+	
+
+
+	function getDaysInMonth(month,year) {
+	// Here January is 1 based
+	//Day 0 is the last day in the previous month
+	 return new Date(year, month, 0).getDate();
+	// Here January is 0 based
+	// return new Date(year, month+1, 0).getDate();
+	};
+	
+    function compareTime(str1, str2){
+    if(str1 === str2){
+         return 0;
+    }
+    var time1 = str1.split(':');
+    var time2 = str2.split(':');
+    if(eval(time1[0]) > eval(time2[0])){
+        return 1;
+    } else if(eval(time1[0]) == eval(time2[0]) && eval(time1[1]) > eval(time2[1])) {
+         return 1;
+    } else {
+         return -1;
+    }
+    }
+	
+
+	// Get Daylight Savings  time
+	function DisplayDstSwitchDates(texty)
+    {
+        //var year = new Date().getYear();
+		var year = texty;
+        if (year < 1000)
+            year += 1900;
+
+        var firstSwitch = 0;
+        var secondSwitch = 0;
+        var lastOffset = 99;
+
+        // Loop through every month of the current year
+        for (i = 0; i < 12; i++)
+        {
+            // Fetch the timezone value for the month
+            var newDate = new Date(Date.UTC(year, i, 0, 0, 0, 0, 0));
+            var tz = -1 * newDate.getTimezoneOffset() / 60;
+
+            // Capture when a timzezone change occurs
+            if (tz > lastOffset)
+                firstSwitch = i-1;
+            else if (tz < lastOffset)
+                secondSwitch = i-1;
+
+            lastOffset = tz;
+        }
+
+        // Go figure out date/time occurrences a minute before
+        // a DST adjustment occurs
+        var secondDstDate = FindDstSwitchDate(year, secondSwitch); //apr
+        var firstDstDate = FindDstSwitchDate(year, firstSwitch);   //sep
+        //if (firstDstDate == null && secondDstDate == null)
+        //    return 'Daylight Savings is not observed in your timezone.';
+        //else
+        return [firstDstDate, secondDstDate];
+    }
+
+    function FindDstSwitchDate(year, month)
+    {
+        // Set the starting date
+        var baseDate = new Date(Date.UTC(year, month, 0, 0, 0, 0, 0));
+        var changeDay = 0;
+        var changeMinute = -1;
+        var baseOffset = -1 * baseDate.getTimezoneOffset() / 60;
+        var dstDate;
+
+        // Loop to find the exact day a timezone adjust occurs
+        for (day = 0; day < 50; day++)
+        {
+            var tmpDate = new Date(Date.UTC(year, month, day, 0, 0, 0, 0));
+            var tmpOffset = -1 * tmpDate.getTimezoneOffset() / 60;
+
+            // Check if the timezone changed from one day to the next
+            if (tmpOffset != baseOffset)
+            {
+                var minutes = 0;
+                changeDay = day;
+
+                // Back-up one day and grap the offset
+                tmpDate = new Date(Date.UTC(year, month, day-1, 0, 0, 0, 0));
+                tmpOffset = -1 * tmpDate.getTimezoneOffset() / 60;
+
+                // Count the minutes until a timezone change occurs
+                while (changeMinute == -1)
+                {
+                    tmpDate = new Date(Date.UTC(year, month, day-1, 0, minutes, 0, 0));
+                    tmpOffset = -1 * tmpDate.getTimezoneOffset() / 60;
+
+                    // Determine the exact minute a timezone change
+                    // occurs
+                    if (tmpOffset != baseOffset)
+                    {
+                        // Back-up a minute to get the date/time just
+                        // before a timezone change occurs
+                        tmpOffset = new Date(Date.UTC(year, month,
+                                             day-1, 0, minutes-1, 0, 0));
+                        changeMinute = minutes;
+                        break;
+                    }
+                    else
+                        minutes++;
+                }
+
+                // Add a month (for display) since JavaScript counts
+                // months from 0 to 11
+                dstDate = tmpOffset.getMonth() + 1;
+
+                // Pad the month as needed
+                if (dstDate < 10) dstDate = "0" + dstDate;
+
+                // Add the day and year
+                dstDate += '/' + tmpOffset.getDate() + '/' + year + ' ';
+ 
+                // Capture the time stamp
+                tmpDate = new Date(Date.UTC(year, month,
+                                   day-1, 0, minutes-1, 0, 0));
+                dstDate += tmpDate.toTimeString().split(' ')[0];
+				var tmpDate1 = tmpDate.getDate()
+                //return dstDate;
+				return tmpDate1;
+            }
+        }
+    }
+	
+
+	
+  </script>
+  
+  
+</body>
